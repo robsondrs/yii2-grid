@@ -18,14 +18,30 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public $baseUrl = "";
 
+    public $pjax = null;
+
+    public $messages = [];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+        ActionColumnAsset::register(Yii::$app->view);
+    }
+
     protected function initDefaultButtons()
     {
         $this->initDefaultButton('go', 'external-link-alt', ['target' => '_blank']);
         $this->initDefaultButton('view', 'eye');
         $this->initDefaultButton('update', 'edit');
         $this->initDefaultButton('delete', 'trash', [
-            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-            'data-method' => 'post',
+            'data-success' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'success', 'Success!')),
+            'data-delete' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'delete', 'Are you sure you want to delete this item?')),
+            'data-yes' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'yes', 'Yes')),
+            'data-no' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'no', 'No')),
+            'data-pjax' => $this->pjax
         ]);
     }
     
