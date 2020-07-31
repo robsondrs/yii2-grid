@@ -40,7 +40,8 @@ class ActionColumn extends \yii\grid\ActionColumn
                         if ($this->redirect) {
                             $url = Url::to(["{$this->redirect}", 'id' => $model->id, 'slug' => $model->getAttribute('slug')], true);
                         } else {
-                            $url = Url::to(["{$this->redirect}/view", 'id' => $model->id, 'slug' => $model->getAttribute('slug')], true);
+                            $this->controller = Yii::$app->controller->id;
+                            $url = Url::to(["{$this->controller}/view", 'id' => $model->id, 'slug' => $model->getAttribute('slug')], true);
                         }
 
                         $url = str_replace(Yii::$app->request->baseUrl, $this->baseUrl, $url);

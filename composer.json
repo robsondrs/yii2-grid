@@ -1,9 +1,9 @@
 {
     "name": "dynamikaweb/yii2-grid",
-    "description": "facilities for working with HTML cleanly",
+    "description": "Yii2 Gridview custom columns",
     "type": "yii2-extension",
     "keywords": [
-      
+    	"columns"
     ],
     "license": "BSD-3-Clause",
     "authors": [
@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.5.0",
         "yiisoft/yii2": "*",
-        "kartik-v/yii2-icons": "*"
+        "kartik-v/yii2-icons": "*",
     },
     "minimum-stability": "dev",
     "prefer-stable": false,
