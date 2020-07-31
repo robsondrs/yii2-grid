@@ -1,0 +1,32 @@
+{
+    "name": "dynamikaweb/yii2-grid",
+    "description": "facilities for working with HTML cleanly",
+    "type": "yii2-extension",
+    "keywords": [
+      
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "RodrigoDornelles",
+            "email": "rodrigo@dornelles.me",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/dynamikaweb/yii2-grid/issues",
+        "source": "http://github.com/dynamikaweb/yii2-grid"
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "*",
+        "kartik-v/yii2-icons": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "dynamikaweb\\": "src"
+        }
+    }
+}
