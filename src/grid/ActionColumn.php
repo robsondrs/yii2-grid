@@ -18,6 +18,10 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public $baseUrl = "";
 
+    public $controller = null;
+
+    public $action = null;
+
     public $pjax = null;
 
     public $messages = [];
@@ -29,6 +33,16 @@ class ActionColumn extends \yii\grid\ActionColumn
     {
         parent::init();
         ActionColumnAsset::register(Yii::$app->view);
+
+        if(!$this->controller && !$this->action){
+            $this->action = "{action}";
+        }
+        else if ($this->controller && !$this->action){
+            $this->action = "{controller}/{action}";
+        }
+        else if (!$this->controller && $this->action) {
+            $this->controller = Yii::$app->controller->id;
+        }
     }
 
     protected function initDefaultButtons()
@@ -85,4 +99,19 @@ class ActionColumn extends \yii\grid\ActionColumn
         }
     }
 
+    public function createUrl($action, $model, $key, $index)
+    {
+        if (is_callable($this->urlCreator)) {
+            return call_user_func($this->urlCreator, $action, $model, $key, $index, $this);
+        }
+
+        $params = is_array($key) ? $key : ['id' => (string) $key];
+        $params = array_merge($params, is_array($this->action)? $this->action: [0 => $this->action]);
+        $params[0] = strtr($params[0], [
+            '{controller}' => $this->controller,
+            '{action}' => $action
+        ]);
+
+        return Url::toRoute($params);
+    }
 }
