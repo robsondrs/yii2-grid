@@ -74,7 +74,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                             $url = Url::to(["{$this->controller}/view", 'id' => $model->id, 'slug' => $model->getAttribute('slug')], true);
                         }
 
-                        $url = str_replace(Yii::$app->request->baseUrl, $this->baseUrl, $url);
+                        $url = preg_replace(['#'.Yii::$app->request->baseUrl.'#'], $this->baseUrl, $url, 1);
                         break;
                     case 'view':
                         $title = Yii::t('yii', 'View');
