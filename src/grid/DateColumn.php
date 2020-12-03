@@ -17,6 +17,8 @@ use Yii;
  * 
  * @property string $format_filter Cell options
  *
+ * @property string $placeholder Prompt filter option
+ *
  */
 class DateColumn extends \yii\grid\DataColumn
 {
@@ -30,15 +32,18 @@ class DateColumn extends \yii\grid\DataColumn
     
     public $filterOptions = [];
 
+    public $placeholder = 'Selecione {attribute}';
+
     public function init ()
     {
         $this->format = empty($this->format_raw)? ['date', $this->format]: $this->format_raw;
+        $this->placeholder = strtr(Yii::t('app', $this->placeholder), ['{attribute}' => $this->grid->filterModel->getAttributeLabel($this->attribute)]);
         $this->filter = \yii\jui\DatePicker::widget([
             'model'=> $this->grid->filterModel,
             'attribute' => $this->attribute,
             'language' => Yii::$app->language,
             'dateFormat' => $this->format_filter,
-            'options' => array_merge(['class' => 'form-control'], $this->filterOptions)
+            'options' => array_merge(['class' => 'form-control', 'placeholder' => $this->placeholder], $this->filterOptions)
         ]);
         $this->options = array_merge(['width' => '150px'], $this->options);
 
