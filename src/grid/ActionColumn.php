@@ -21,6 +21,8 @@ class ActionColumn extends \yii\grid\ActionColumn
     public $controller = null;
 
     public $action = null;
+    
+    public $modelClass = null;
 
     public $pjax = null;
 
@@ -106,6 +108,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         }
 
         $params = is_array($key) ? $key : ['id' => (string) $key];
+        $params = isset($this->modelClass)?array_merge($params, ['modelClass' => $this->modelClass]):$params;
         $params = array_merge($params, is_array($this->action)? $this->action: [0 => $this->action]);
         $params[0] = strtr($params[0], [
             '{controller}' => $this->controller,
