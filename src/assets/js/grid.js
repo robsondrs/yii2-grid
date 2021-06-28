@@ -4,6 +4,7 @@ jQuery("[data-delete]").on("click",  function (event) {
     success = jQuery(this).data('success');
     title = jQuery(this).data('delete');
     url = jQuery(this).attr('href');
+    redirect = jQuery(this).data('redirect');
     yes = jQuery(this).data('yes');
     no = jQuery(this).data('no');
     
@@ -30,6 +31,9 @@ jQuery("[data-delete]").on("click",  function (event) {
             showConfirmButton: true,
             timer: 1000,
             onClose: () => {
+                if (redirect) {
+                    window.location.href = redirect;
+                }
                 if (pjaxgrid) {
                     jQuery.pjax.reload({container: pjaxgrid});
                 } else {
