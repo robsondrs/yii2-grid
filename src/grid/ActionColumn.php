@@ -49,9 +49,9 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     protected function initDefaultButtons()
     {
-        $this->initDefaultButton('go', 'external-link-alt', ['target' => '_blank']);
+        $this->initDefaultButton('go', 'share', ['target' => '_blank']);
         $this->initDefaultButton('view', 'eye');
-        $this->initDefaultButton('update', 'edit');
+        $this->initDefaultButton('update', 'pen');
         $this->initDefaultButton('delete', 'trash', [
             'data-success' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'success', 'Success!')),
             'data-delete' => Yii::t('yii', ArrayHelper::getValue($this->messages, 'delete', 'Are you sure you want to delete this item?')),
